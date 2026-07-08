@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>哆啦A夢風格 - 足球無人機未來科技網</title>
+    <style>
+        /* 全域樣式與哆啦A夢配色定義 */
+        :root {
+            --dora-blue: #00A0E9;     /* 哆啦A夢藍 */
+            --dora-white: #FFFFFF;    /* 乾淨白 */
+            --dora-red: #E60012;      /* 項圈紅 */
+            --dora-yellow: #FFF100;   /* 鈴鐺黃 */
+            --dora-dark: #222222;     /* 科技深灰 */
+            --dora-light-blue: #e3f4fc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, "Microsoft JhengHei";
+        }
+
+        body {
+            background-color: #f4f9fc;
+            color: var(--dora-dark);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* 導覽列：融入項圈與鈴鐺概念 */
+        header {
+            background-color: var(--dora-blue);
+            color: white;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-bottom: 8px solid var(--dora-red); /* 紅色項圈 */
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* 網頁招牌黃色鈴鐺 */
+        .bell-icon {
+            width: 35px;
+            height: 35px;
+            background-color: var(--dora-yellow);
+            border-radius: 50%;
+            border: 3px solid var(--dora-dark);
+            position: relative;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .bell-icon::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            background: var(--dora-dark);
+            top: 12px;
+            left: 0;
+        }
+        .bell-icon::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--dora-dark);
+            border-radius: 50%;
+            bottom: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--dora-yellow);
+        }
+
+        /* Hero 主視覺區 */
+        .hero {
+            background: linear-gradient(135deg, var(--dora-blue) 0%, #0077b6 100%);
+            color: white;
+            padding: 80px 5%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "⚽";
+            position: absolute;
+            font-size: 15rem;
+            opacity: 0.08;
+            right: -50px;
+            bottom: -50px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        .cta-btn {
+            background-color: var(--dora-yellow);
+            color: var(--dora-dark);
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: 3px solid var(--dora-dark);
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 0 var(--dora-dark);
+            transition: transform 0.1s, box-shadow 0.1s;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 var(--dora-dark);
+        }
+
+        /* 核心區塊通用樣式 */
+        section {
+            padding: 60px 5%;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 4px;
+            background-color: var(--dora-red);
+            bottom: -10px;
+            left: 20px;
+            border-radius: 2px;
+        }
+
+        /* 產品特色區：四次元百寶袋造型卡片 */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: var(--dora-white);
+            border: 3px solid var(--dora-blue);
+            border-radius: 20px 20px 100px 100px;
+            padding: 40px 30px;
+            box-shadow: 0 6px 15px rgba(0,160,233,0.15);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+            color: var(--dora-blue);
+        }
+
+        /* ⚡ 新增：2S 電池智能管理面板 ⚡ */
+        .battery-section {
+            background-color: var(--dora-light-blue);
+            border-top: 4px dashed var(--dora-blue);
+            border-bottom: 4px dashed var(--dora-blue);
+        }
+
+        .battery-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border: 3px solid var(--dora-dark);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 5px 5px 0px rgba(0,0,0,0.1);
+        }
+
+        /* 警告標語 */
+        .danger-alert {
+            background-color: #ffeef0;
+            border-left: 5px solid var(--dora-red);
+            padding: 15px;
+            margin-bottom: 25px;
+            text-align: left;
+            border-radius: 4px;
+        }
+        .danger-alert strong { color: var(--dora-red); }
+
+        /* 進度條/儀表板 */
+        .battery-status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .status-box {
+            background: #f8fafd;
+            border: 2px solid var(--dora-blue);
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        .status-box h4 { color: var(--dora-blue); margin-bottom: 5px;}
+        .status-box .value { font-size: 1.8rem; font-weight: bold; }
+
+        .progress-container {
+            text-align: left;
+            margin-bottom: 25px;
+        }
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .progress-bar-bg {
+            background: #e0e0e0;
+            height: 25px;
+            border-radius: 20px;
+            border: 2px solid var(--dora-dark);
+            overflow: hidden;
+        }
+        .progress-bar-fill {
+            background: linear-gradient(90deg, #ffcc00, #4caf50);
+            height: 100%;
+            width: 100%; /* 模擬滿電 8.4V */
+            transition: width 0.5s;
+        }
+
+        /* 電壓表格 */
+        .battery-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            text-align: left;
+        }
+        .battery-table th, .battery-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #ddd;
+        }
+        .battery-table th {
+            background-color: var(--dora-blue);
+            color: white;
+        }
+        .battery-table tr:nth-child(even) { background-color: #f9f9f9; }
+        .row-danger { color: var(--dora-red); font-weight: bold; background-color: #fff0f1 !important;}
+
+        /* 頁尾 */
+        footer {
+            background-color: var(--dora-dark);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            border-top: 5px solid var(--dora-yellow);
+        }
+
+        @media (max-width: 768px) {
+            nav { display: none; }
+            .hero h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 導覽列 -->
+    <header>
+        <div class="logo-area">
+            <div class="bell-icon"></div>
+            <div class="logo-text">DORA-DRONE</div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#features">道具特色</a></li>
+                <li><a href="#battery">電池安全面板</a></li>
+                <li><a href="#footer">研發團隊</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- 英雄主視覺 -->
+    <section class="hero">
+        <h1>未來科技：22 世紀足球無人機</h1>
+        <p>結合竹蜻蜓的飛行科技與絕對防禦的網格球體，這不只是無人機，這是從四次元百寶袋拿出來的全新運動炫風！</p>
+        <button class="cta-btn" onclick="document.getElementById('battery').scrollIntoView();">查看機載能源狀態 🔋</button>
+    </section>
+
+    <!-- 道具特色區（百寶袋卡片） -->
+    <section class="features" id="features">
+        <h2 class="section-title">祕密道具核心技術</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="card-icon">🚁</div>
+                <h3>竹蜻蜓動力系統</h3>
+                <p>採用高效率微型全向螺旋槳，提供極致的靈敏度與滯空穩定性，在空中任意變向閃避防守。</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">⚽</div>
+                <h3>空氣砲防禦外殼</h3>
+                <p>球形外殼採用具備高彈性的網格纖維，耐撞程度宛如空氣砲的防護罩，激烈的空中碰撞也不怕。</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🔋</div>
+                <h3>2S 高倍率鋰聚合物</h3>
+                <p>專為極限運動調校。具備爆發性電流輸出，但飛手必須隨時監控電壓狀態，避免踏入 0% 陷阱！</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ⚡ 新增：電池管理面板區塊 ⚡ -->
+    <section class="battery-section" id="battery">
+        <h2 class="section-title">2S 飛行鋰電池 智能管理面板</h2>
+        
+        <div class="battery-container">
+            
+            <!-- 陷阱與盲點警示區 -->
+            <div class="danger-alert">
+                ⚠️ <strong>【重要飛手盲點警示】</strong><br>
+                許多新手會誤以為「3.7V」是 2S 電池的沒電標準。<strong>大錯特錯！</strong> 3.7V 只是單節電池的標稱中值。若您的 2S 總電壓量到 3.7V，代表單節只剩 1.85V，電池已經<strong>「嚴重過放（0%）且永久損壞」</strong>！請立刻停用該電池。
+            </div>
+
+            <!-- 當前滿電動態模擬 -->
+            <div class="progress-container">
+                <div class="progress-label">
+                    <span>標準 2S 機載核心電量狀態 (當前：飽電狀態)</span>
+                    <span>100%</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill"></div>
+                </div>
+            </div>
+
+            <!-- 即時狀態框 -->
+            <div class="battery-status-grid">
+                <div class="status-box">
+                    <h4>2S 總電壓</h4>
+                    <div class="value">8.40 V</div>
+                </div>
+                <div class="status-box">
+                    <h4>單節平均電壓</h4>
+                    <div class="value">4.20 V</div>
+                </div>
+                <div class="status-box">
+                    <h4>儲存電壓 (50%)</h4>
+                    <div class="value">7.74 V</div>
+                </div>
+            </div>
+
+            <!-- 電壓對照表 -->
+            <h3>🔋 2S 鋰電池電壓與電量對照表</h3>
+            <table class="battery-table">
+                <thead>
+                    <tr>
+                        <th>2S 總電壓 (V)</th>
+                        <th>單節平均電壓 (V)</th>
+                        <th>電量百分比 (%)</th>
+                        <th>飛手安全調度指示</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>8.40V</strong></td>
+                        <td>4.20V</td>
+                        <td>100%</td>
+                        <td>🟢 滿電狀態，大雄也可以安心起飛！</td>
+                    </tr>
+                    <tr>
+                        <td><strong>8.00V</strong></td>
+                        <td>4.00V</td>
+                        <td>~80%</td>
+                        <td>🟢 電量充足，空中對撞與加速性能極佳。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>7.74V</strong></td>
+                        <td>3.87V</td>
+                        <td>~50%</td>
+                        <td>🟡 儲存電壓。若無人機一週內不參賽，請維持在此電壓。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>7.40V</strong></td>
+                        <td>3.70V</td>
+                        <td>~20%</td>
+                        <td>🟡 標稱中值。電量偏低，請準備召回無人機進場降落。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>7.20V</strong></td>
+                        <td>3.60V</td>
+                        <td>~5%</td>
+                        <td>🔴 警報！已經沒電，強制降落，否則將傷害電池。</td>
+                    </tr>
+                    <tr class="row-danger">
+                        <td>3.70V</td>
+                        <td>1.85V</td>
+                        <td>0%</td>
+                        <td>❌ 嚴重過放損壞！檢測到此電壓請直接報廢，切勿充電！</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </section>
+
+    <!-- 頁尾 -->
+    <footer id="footer">
+        <p>© 2026 哆啦A夢未來科技實驗室 - 野比航空工業聯合榮譽出品</p>
+    </footer>
+
+</body>
+</html>
